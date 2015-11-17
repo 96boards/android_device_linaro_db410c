@@ -9,11 +9,22 @@
 #
 
 PRODUCT_PACKAGES += \
-    gralloc.drm     \
-    libGLES_mesa
+	libGLES_android \
+	gralloc.default \
+	hwcomposer.default \
+	libGLESv1_CM_emulation \
+	lib_renderControl_enc \
+	libEGL_emulation \
+	libGLESv2_enc \
+	libOpenglSystemCommon \
+	libGLESv2_emulation \
+	libGLESv1_enc
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    hal.gralloc=drm \
-    debug.egl.hw=1 \
-    ro.opengles.version=196608
+	ro.nohardwaregfx=true \
+	ro.opengles.version=131072 \
+	ro.sf.lcd_density=160 \
+	debug.sf.no_hw_vsync=1 \
+	ro.kernel.qemu.gles=0 \
+	ro.kernel.qemu=1
 

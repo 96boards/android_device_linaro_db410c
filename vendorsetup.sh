@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
-add_lunch_combo full_dragonboard410c-user
-add_lunch_combo full_dragonboard410c-userdebug
-add_lunch_combo full_dragonboard410c-eng
+add_lunch_combo db410c-user
+add_lunch_combo db410c-userdebug
+add_lunch_combo db410c-eng

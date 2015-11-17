@@ -1,0 +1,12 @@
+on init
+    # mount debugfs
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+
+on fs
+    mount_all /fstab.qcom

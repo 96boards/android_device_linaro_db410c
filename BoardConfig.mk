@@ -1,71 +1,83 @@
-# config.mk
-#
-# Product-specific compile-time definitions.
-#
-
-# The generic product target doesn't have any hardware-specific pieces.
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := true
-TARGET_NO_RADIOIMAGE := true
-
+# Primary Arch
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
+ifneq (,$(wildcard $(LOCAL_PATH)/../../../bionic/libc/arch-arm64/cortex-a57))
+TARGET_CPU_VARIANT := cortex-a57
+else
+TARGET_CPU_VARIANT := cortex-a53
+endif
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_SMP := true
 
+# Secondary Arch
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+ifneq (,$(wildcard $(LOCAL_PATH)/../../../bionic/libc/arch-arm/cortex-a57))
+TARGET_2ND_CPU_VARIANT := cortex-a57
+else
+TARGET_2ND_CPU_VARIANT := cortex-a53
+endif
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a15
 
-#SMALLER_FONT_FOOTPRINT := true
-#MINIMAL_FONT_FOOTPRINT := true
+TARGET_USES_64_BIT_BINDER := true
+TARGET_SUPPORTS_32_BIT_APPS := true
+TARGET_SUPPORTS_64_BIT_APPS := true
+
+TARGET_BOARD_PLATFORM := db410c
+ANDROID_64=true
+WITH_DEXPREOPT ?= true
+USE_OPENGL_RENDERER := true
+BIONIC_TESTS ?= true
 
 # Some framework code requires this to enable BT
 # For now:
 BOARD_HAVE_BLUETOOTH := false
-#BOARD_HAVE_BLUETOOTH := true
-#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/generic/common/bluetooth
 
-BOARD_USES_GENERIC_AUDIO := true
+ifeq ($(strip $(USE_LINARO_TOOLCHAIN)),true)
+# 64bit toolchain
+KERNEL_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9-linaro/bin/aarch64-linux-android-
+TARGET_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9-linaro/bin/aarch64-linux-android-
+# 32bit toolchain
+# Linaro 32bit toolchain is disabled because of this bug https://bugs.linaro.org/show_bug.cgi?id=383
+2ND_TARGET_TOOLCHAIN_ROOT ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9-linaro
+2ND_TARGET_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9-linaro/bin/arm-linux-androideabi-
+endif
 
-BOARD_GPU_DRIVERS := freedreno
-#BOARD_EGL_CFG := device/generic/common/gpu/egl_mesa.cfg
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 console=ttyMSM0,115200n8 debug earlyprintk=serial,0x16640000,115200 verbose androidboot.selinux=permissive androidboot.hardware=qcom user_debug=31
 
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_KERNEL := false
+TARGET_NO_RECOVERY := true
+TARGET_USE_XLOADER := false
+TARGET_USE_UBOOT := false
+TARGET_HARDWARE_3D := true
+TARGET_SHELL := ash
+BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_ALSA_AUDIO := false
 USE_CAMERA_STUB := true
-
-BUILD_EMULATOR_OPENGL := false
-USE_OPENGL_RENDERER := true
-
-BOARD_USE_LEGACY_UI := true
-VSYNC_EVENT_PHASE_OFFSET_NS := 0
-
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hdc.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
-
-TARGET_USES_64_BIT_BCMDHD := true
-TARGET_USES_64_BIT_BINDER := true
-TARGET_USES_LOGD := true
-
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 524288000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 880803840
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 
-BOARD_SEPOLICY_DIRS += build/target/board/generic/sepolicy
+BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
 BOARD_SEPOLICY_UNION += \
-        bootanim.te \
-        device.te \
-        domain.te \
-        file.te \
-        file_contexts \
-        qemud.te \
-        rild.te \
-        shell.te \
-        surfaceflinger.te \
-        system_server.te
+        gatord.te  \
+        init.te  \
+        kernel.te  \
+        logd.te  \
+        mediaserver.te  \
+        netd.te  \
+        shell.te  \
+        surfaceflinger.te
+
+#TARGET_HAS_A53ERRATUM835769 := true
+
+#GRALLOC_FB_SWAP_RED_BLUE:=1
+GRALLOC_DEPTH:=GRALLOC_32_BITS
+
+# Applies only to AOSP master build for db410c where it needs prebuilt STLPORT
+INCLUDE_STLPORT_FOR_MASTER := true

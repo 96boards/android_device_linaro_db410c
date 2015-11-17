@@ -1,0 +1,72 @@
+on init
+    # mount debugfs
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+on init
+    # disable transparent huge pages
+    write /sys/kernel/mm/transparent_hugepage/enabled "never"
+
+on fs
+    mount_all /fstab.db410c
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/misc/gatord 0700 root root
+
+    # Set SELinux security contexts for files used by lava.
+    restorecon_recursive /data/local/tmp/lava
+
+on post-fs
+    chmod 0666 /dev/graphics/fb0
+
+    # For legacy support
+    # See storage config details at http://source.android.com/tech/storage/
+    # since /storage is mounted on post-fs in init.rc
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+on boot
+
+    setprop ARGH ARGH
+    setprop ro.radio.use-ppp no
+    setprop ro.build.product generic
+    setprop ro.product.device generic
+
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
+
+# Set Display density
+    setprop ro.sf.lcd_density 160
+
+# Disable GPU support
+    setprop ro.kernel.qemu 1
+    setprop ro.kernel.qemu.gles 0
+
+# change permissions for process groups
+# https://bugs.launchpad.net/bugs/1037611
+    chmod 0660 /dev/cpuctl
+
+# enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector
+    setprop ro.com.google.locationfeatures 1
+
+# enable test harness
+    setprop ro.test_harness true
+
+    # Setup paths used for socket communication with the dhcp daemon (dhcpd)
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class main
+    group dhcp
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+     class late_start
+     disabled
+     oneshot
+

@@ -14,10 +14,10 @@
 # limitations under the License.
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-$(call inherit-product, device/freedreno/dragonboard410c/device.mk)
+$(call inherit-product, device/linaro/db410c/device.mk)
 
-PRODUCT_NAME := full_dragonboard410c
-PRODUCT_DEVICE := dragonboard410c
+PRODUCT_NAME := db410c
+PRODUCT_DEVICE := db410c
 PRODUCT_BRAND := Android
-PRODUCT_MODEL := dragonboard410c
-PRODUCT_MANUFACTURER := freedreno
+PRODUCT_MODEL := db410c
+PRODUCT_MANUFACTURER := linaro
