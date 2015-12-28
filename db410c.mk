@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/linaro/db410c/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 PRODUCT_NAME := db410c
 PRODUCT_DEVICE := db410c
