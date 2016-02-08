@@ -43,7 +43,13 @@ TARGET_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/aarch64/aarch6
 2ND_TARGET_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9-linaro/bin/arm-linux-androideabi-
 endif
 
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 console=ttyMSM0,115200n8 debug earlyprintk=serial,0x16640000,115200 verbose androidboot.selinux=permissive androidboot.hardware=qcom user_debug=31
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 debug earlyprintk=serial,0x16640000,115200 verbose androidboot.selinux=permissive androidboot.hardware=db410c user_debug=31
+
+# Kernel
+TARGET_KERNEL_SOURCE ?= kernel/linaro/qcom
+KERNEL_CONFIG = arch/arm64/configs/defconfig kernel/configs/distro.config kernel/configs/android.config
+DEVICE_TREES := msm8916-mtp:msm8916-mtp.dtb apq8016-sbc:apq8016-sbc.dtb
+BUILD_KERNEL_MODULES ?= true
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
@@ -63,21 +69,10 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 
+BOARD_USES_DRM_HWCOMPOSER := true
+BOARD_GPU_DRIVERS := freedreno
+
 BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
-BOARD_SEPOLICY_UNION += \
-        gatord.te  \
-        init.te  \
-        kernel.te  \
-        logd.te  \
-        mediaserver.te  \
-        netd.te  \
-        shell.te  \
-        surfaceflinger.te
-
-#TARGET_HAS_A53ERRATUM835769 := true
-
-#GRALLOC_FB_SWAP_RED_BLUE:=1
-GRALLOC_DEPTH:=GRALLOC_32_BITS
 
 # Applies only to AOSP master build for db410c where it needs prebuilt STLPORT
 INCLUDE_STLPORT_FOR_MASTER := true

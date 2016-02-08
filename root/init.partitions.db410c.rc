@@ -9,4 +9,4 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
 
 on fs
-    mount_all /fstab.qcom
+    mount_all /fstab.db410c
