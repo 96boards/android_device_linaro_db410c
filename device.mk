@@ -27,7 +27,7 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 DEVICE_PACKAGE_OVERLAYS := device/linaro/db410c/overlay
 
 # Add openssh support for remote debugging and job submission
-PRODUCT_PACKAGES += ssh sftp scp sshd ssh-keygen sshd_config start-ssh
+PRODUCT_PACKAGES += ssh sftp scp sshd ssh-keygen sshd_config start-ssh wpa_supplicant
 
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
@@ -64,7 +64,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
 	frameworks/native/data/etc/android.software.app_widgets.xml:system/etc/permissions/android.software.app_widgets.xml \
 	frameworks/native/data/etc/android.software.backup.xml:system/etc/permissions/android.software.backup.xml \
-	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+	device/linaro/db410c/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Copy firmware files
 PRODUCT_COPY_FILES += \
