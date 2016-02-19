@@ -70,6 +70,26 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(call add-to-product-copy-files-if-exists,\
 	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
-	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/a300_pm4.fw:root/lib/firmware/a300_pm4.fw)
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.b00:root/lib/firmware/venus.b00 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.b01:root/lib/firmware/venus.b01 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.b02:root/lib/firmware/venus.b02 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.b03:root/lib/firmware/venus.b03 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.b04:root/lib/firmware/venus.b04 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.mbn:root/lib/firmware/venus.mbn \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/venus.mdt:root/lib/firmware/venus.mdt \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b00:root/lib/firmware/wcnss.b00 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b01:root/lib/firmware/wcnss.b01 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b02:root/lib/firmware/wcnss.b02 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b04:root/lib/firmware/wcnss.b04 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b06:root/lib/firmware/wcnss.b06 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b09:root/lib/firmware/wcnss.b09 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b10:root/lib/firmware/wcnss.b10 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.b11:root/lib/firmware/wcnss.b11 \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wcnss.mdt:root/lib/firmware/wcnss.mdt \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wlan/prima/WCNSS_cfg.dat:root/lib/firmware/wlan/prima/WCNSS_cfg.dat \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wlan/prima/WCNSS_qcom_cfg.ini:root/lib/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wlan/prima/WCNSS_qcom_wlan_nv.bin:root/lib/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+	vendor/db410c/linux-ubuntu-board-support-package-v1.2/proprietary-ubuntu/wlan/prima/WCNSS_wlan_dictionary.dat:root/lib/firmware/wlan/prima/WCNSS_wlan_dictionary.dat)
 
 $(call inherit-product-if-exists, device/linaro/build/common-device.mk)
