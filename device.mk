@@ -20,6 +20,7 @@ $(call inherit-product-if-exists,frameworks/native/build/tablet-10in-xhdpi-2048-
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			$(LOCAL_PATH)/root/fstab.db410c:root/fstab.db410c \
 			$(LOCAL_PATH)/root/init.db410c.rc:root/init.db410c.rc \
+			$(LOCAL_PATH)/root/init.db410c.usb.rc:root/init.db410c.usb.rc \
 			$(LOCAL_PATH)/root/ueventd.db410c:root/ueventd.db410c.rc \
 			$(LOCAL_PATH)/db410c_monkey_blacklist:data/db410c_monkey_blacklist)
 
