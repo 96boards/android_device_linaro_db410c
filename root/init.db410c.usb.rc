@@ -7,7 +7,7 @@ on boot
     write /config/usb_gadget/g1/bcdDevice 0x0223
     write /config/usb_gadget/g1/bcdUSB 0x0200
     mkdir /config/usb_gadget/g1/strings/0x409 0770
-    write /config/usb_gadget/g1/strings/0x409/serialnumber "0123456789"
+    write /config/usb_gadget/g1/strings/0x409/serialnumber $ro.serialno
     write /config/usb_gadget/g1/strings/0x409/manufacturer "QUALCOMM"
     write /config/usb_gadget/g1/strings/0x409/product "ADB Gadget"
     mkdir /config/usb_gadget/g1/functions/accessory.gs2
@@ -38,37 +38,37 @@ on property:init.svc.adbd=stopped
 on property:sys.usb.config=mtp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
     write /config/usb_gadget/g1/os_desc/use 1
-    write /config/usb_gadget/g1/idProduct 0x5202
+    write /config/usb_gadget/g1/idProduct 0x9002
 
 on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
     write /config/usb_gadget/g1/os_desc/use 1
-    write /config/usb_gadget/g1/idProduct 0x5203
+    write /config/usb_gadget/g1/idProduct 0x9003
 
 on property:sys.usb.config=rndis && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x5204
+    write /config/usb_gadget/g1/idProduct 0x9004
 
 on property:sys.usb.config=rndis,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x5205
+    write /config/usb_gadget/g1/idProduct 0x9005
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
     write /config/usb_gadget/g1/os_desc/use 1
-    write /config/usb_gadget/g1/idProduct 0x5206
+    write /config/usb_gadget/g1/idProduct 0x9006
 
 on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
     write /config/usb_gadget/g1/os_desc/use 1
-    write /config/usb_gadget/g1/idProduct 0x5207
+    write /config/usb_gadget/g1/idProduct 0x9007
 
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x5208
+    write /config/usb_gadget/g1/idProduct 0x9008
 
 on property:sys.usb.config=midi && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x5209
+    write /config/usb_gadget/g1/idProduct 0x9009
 
 on property:sys.usb.config=midi,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x520a
+    write /config/usb_gadget/g1/idProduct 0x900a
 
 on property:sys.usb.config=accessory && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idProduct 0x2d00
