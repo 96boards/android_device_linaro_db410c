@@ -1,3 +1,5 @@
+import init.db410c.usb.rc
+
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
